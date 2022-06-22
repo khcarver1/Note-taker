@@ -18,14 +18,14 @@ app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, './routes/htmlRoutes/notes.html'));
 });
 
-app.get('/api/db', (req, res) => {
+app.get('/api/notes', (req, res) => {
   let results = db;
   res.json(results);
 });
 
-
-app.post('/api/db', (req, res) => {
+app.post('/api/notes', (req, res) => {
   let noteArray = db;
+  req.body.id = noteArray.length.toString();
   noteArray.push(req.body);
   fs.writeFileSync(
     path.join(__dirname, './db/db.json'),
@@ -34,6 +34,7 @@ app.post('/api/db', (req, res) => {
   res.json(req.body);
 });
 
+app.delete
 
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}!`)
